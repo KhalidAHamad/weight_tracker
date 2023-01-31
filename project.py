@@ -5,6 +5,9 @@ TODO:
     - get_bmi
     - store data in json
 """
+import math
+import statistics
+
 from user import User
 
 
@@ -70,6 +73,17 @@ def get_weekly_median(weights: list[float | None]) -> list[float]:
 
     "The median is the value separating the higher half from the lower half of a data sample."
     """
+    median_weights: list = []
+    n_weeks: int = math.ceil(len(weights) / 7)
+    for i in range(n_weeks):
+        start_ix: int = i * 7           # days per week = 7
+        end_ix: int = len(weights) if (i + 1) == n_weeks else (start_ix + 7)
+        weights_current_week: list = weights[start_ix:end_ix]
+        # removing None values from days with no entries
+        valid_weights_current_week: filter = filter(lambda x: True if x is not None else False, weights_current_week)
+        median_weights.append(statistics.median(valid_weights_current_week))
+
+    return median_weights
 
 
 def get_bmi():
