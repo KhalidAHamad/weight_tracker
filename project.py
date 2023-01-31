@@ -64,8 +64,12 @@ def get_weekly_avg(weights: list[float | None]) -> list[float]:
     return weekly_avg_weight
 
 
-def get_weekly_median():
-    ...
+def get_weekly_median(weights: list[float | None]) -> list[float]:
+    """
+    Takes a list of weights and returns the median weight for each week.
+
+    "The median is the value separating the higher half from the lower half of a data sample."
+    """
 
 
 def get_bmi():
