@@ -98,6 +98,18 @@ def get_bmi(weight: float | int, height: float | int) -> float:
     return round(weight / (height ** 2), 1)
 
 
+def get_bmi_category(bmi: float) -> str:
+    """Returns a string containing the category that the User's bmi belongs to."""
+    if bmi < 18.5:
+        return "Underweight"
+    elif 18.5 <= bmi < 25:
+        return "Normal weight"
+    elif 25 <= bmi < 30:
+        return "Overweight"
+    else:
+        return "Obese"
+
+
 def read_from_file():
     ...
 

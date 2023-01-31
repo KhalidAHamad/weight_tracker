@@ -6,7 +6,8 @@ from multiprocessing.sharedctypes import Value
 
 import pytest
 
-from project import get_bmi, get_weekly_avg, get_weekly_median
+from project import (get_bmi, get_bmi_category, get_weekly_avg,
+                     get_weekly_median)
 
 
 def test_get_weekly_avg():
@@ -90,3 +91,14 @@ def test_get_bmi():
     with pytest.raises(ValueError):
         assert get_bmi(64, 0.0) == 22.1
 
+
+def test_get_bmi_category():
+    assert get_bmi_category(18.4999) == "Underweight"
+    assert get_bmi_category(18.5) == "Normal weight"
+    assert get_bmi_category(23.5) == "Normal weight"
+    assert get_bmi_category(24.9) == "Normal weight"
+    assert get_bmi_category(25.0) == "Overweight"
+    assert get_bmi_category(27.3) == "Overweight"
+    assert get_bmi_category(29.999) == "Overweight"
+    assert get_bmi_category(30) == "Obese"
+    assert get_bmi_category(35) == "Obese"
