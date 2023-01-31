@@ -1,12 +1,11 @@
 """
 TODO:
-    - TDD for get_weekly_avg
-    - get_weekly_median
     - get_bmi
     - store data in json
 """
 import math
 import statistics
+import sys
 
 from user import User
 
@@ -86,8 +85,17 @@ def get_weekly_median(weights: list[float | None]) -> list[float]:
     return median_weights
 
 
-def get_bmi():
-    ...
+def get_bmi(weight: float | int, height: float | int) -> float:
+    """Calculate body's bmi.
+    
+    "Body mass index (BMI) is a measure of body fat based on height and weight
+    that applies to adult men and women.
+    
+    BMI = body weight in kg / person's height in meters squared"
+    """
+    if weight <= 0 or height <= 0:
+        raise ValueError("User's weight and height must be positive numbers.")
+    return round(weight / (height ** 2), 1)
 
 
 def read_from_file():

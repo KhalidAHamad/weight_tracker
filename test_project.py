@@ -2,7 +2,11 @@
 TODO:
     ! Test when user did not record any weight.
 """
-from project import get_weekly_avg, get_weekly_median
+from multiprocessing.sharedctypes import Value
+
+import pytest
+
+from project import get_bmi, get_weekly_avg, get_weekly_median
 
 
 def test_get_weekly_avg():
@@ -70,5 +74,19 @@ def test_get_weekly_median():
     ]
 
 
-def test_function_n():
-    ...
+def test_get_bmi():
+    # using positional args
+    assert get_bmi(64, 1.70) == 22.1
+    # using keyword args
+    assert get_bmi(78, 1.70) == 27.0
+    # weight as float
+    assert get_bmi(89.8, 1.70) == 31.1
+
+    # exception is raised if negative or zero values are provided
+    with pytest.raises(ValueError):
+        assert get_bmi(0, 1.70) == 22.1
+    with pytest.raises(ValueError):
+        assert get_bmi(78, -1.70) == 27.0
+    with pytest.raises(ValueError):
+        assert get_bmi(64, 0.0) == 22.1
+
